@@ -1,15 +1,15 @@
 #public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
- server <%= ntp_server01 %> iburst
- server <%= ntp_server02 %> iburst
- server <%= ntp_server03 %> iburst
- server <%= ntp_server04 %> iburst
+ server <%= lookup('ntp::ntp_server01') %> iburst 
+ server <%= lookup('ntp::ntp_server02') %> iburst
+ server <%= lookup('ntp::ntp_server03') %> iburst
+ server <%= lookup('ntp::ntp_server04') %> iburst
 #
 # # Ignore stratum in source selection.
  stratumweight 0
 #
 # # Record the rate at which the system clock gains/losses time.
-driftfile <%= drift_file -%>
+driftfile <%= lookup('ntp::drift_file') -%>
 #
 # # Enable kernel RTC synchronization.
  rtcsync
@@ -22,7 +22,7 @@ driftfile <%= drift_file -%>
  bindcmdaddress 127.0.0.1
 # bindcmdaddress ::1
 
-restrict <%= restrict_value -%>
+restrict <%= lookup('ntp::restrict_value') -%>
 
 # keyfile /etc/chrony.keys
 #
